@@ -11,7 +11,6 @@ liczba_kobiet_2f_waga(x)
 }
 \value{
 liczba
-#' @importFrom dplyr \%>\% filter count pull
 }
 \description{
 Funkcja analogiczna do \code{liczba_kobiet_2f}, ale zwraca

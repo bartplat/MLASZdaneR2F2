@@ -2,6 +2,7 @@
 #' @description Funkcja przechowująca nazwę i adres szkoły jako listę.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
+#' @export
 dane_szkoly_2f = function(x) {
   list(
     `nazwa szkoły` = unique(trimws(x$B0)),
@@ -15,6 +16,7 @@ dane_szkoly_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
 #' @importFrom dplyr summarise pull
+#' @export
 liczba_ucz_2f = function(x) {
   x %>%
     summarise(liczba_ucz = unique(n_ucz)) %>%
@@ -27,6 +29,7 @@ liczba_ucz_2f = function(x) {
 #' w grupie.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
+#' @export
 liczba_abs_2f = function(x) {
   return(sum(x$PLC %in% c(1, 2), na.rm = TRUE))
 }
@@ -37,6 +40,7 @@ liczba_abs_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
 #' @importFrom dplyr %>% count pull
+#' @export
 liczba_abs_2f_waga = function(x) {
   x %>%
     filter(PLC %in% c(1, 2)) %>%
@@ -51,6 +55,7 @@ liczba_abs_2f_waga = function(x) {
 #' grupie.
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
+#' @export
 liczba_kobiet_2f = function(x) {
   return(sum(x$PLC %in% 1, na.rm = TRUE))
 }
@@ -60,7 +65,8 @@ liczba_kobiet_2f = function(x) {
 #' (np. województwo).
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return liczba
-#' #' @importFrom dplyr %>% filter count pull
+#' @importFrom dplyr %>% filter count pull
+#' @export
 liczba_kobiet_2f_waga = function(x) {
   x %>%
     filter(PLC %in% 1) %>%
@@ -76,6 +82,7 @@ liczba_kobiet_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return ciąg znaków
 #' @importFrom dplyr %>% .data filter case_when summarise
+#' @export
 firma_badawcza_2f = function(x) {
   x = x %>%
     filter(!(Wykonawca %in% 0)) %>%
@@ -90,6 +97,7 @@ firma_badawcza_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% .data case_when distinct mutate select
+#' @export
 formy_2f = function(x) {
   x = x %>%
     select("B1", "wojewodztwo") %>%
@@ -121,6 +129,7 @@ formy_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% select distinct left_join rename count
+#' @export
 zawod_liczebnosc_2f = function(x) {
   n = list(n = sum(!is.na(x$B2), na.rm = TRUE))
 
@@ -147,6 +156,7 @@ zawod_liczebnosc_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>% select distinct left_join rename count mutate
+#' @export
 zawod_liczebnosc_2f_waga = function(x) {
   n = list(n = sum(as.numeric(!is.na(x$B2)) * x$waga_tuk_2f, na.rm = TRUE))
 
@@ -176,6 +186,7 @@ zawod_liczebnosc_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarobkowa_2f = function(x) {
   list(
     etykieta = "odsetek pracujących zarobkowo na podstawie PR1 - lipiec-wrzesień",
@@ -198,6 +209,7 @@ praca_zarobkowa_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarobkowa_2f_waga = function(x) {
   list(
     etykieta = "odsetek pracujących zarobkowo na podstawie PR1 - lipiec-wrzesień - WAŻONE",
@@ -225,6 +237,7 @@ praca_zarobkowa_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarobkowa_mies_2f = function(x) {
   list(
     etykieta = "odsetek pracujących zarobkowo na podstawie PR1 - podział na miesiące",
@@ -247,6 +260,7 @@ praca_zarobkowa_mies_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarobkowa_mies_2f_waga = function(x) {
   list(
     etykieta = "odsetek pracujących zarobkowo na podstawie PR1 - podział na miesiące - WAŻONE",
@@ -272,6 +286,7 @@ praca_zarobkowa_mies_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 bezrobocie_2f = function(x) {
   list(
     etykieta = "bezrobotni na podstawie PR1 - lipiec-wrzesień",
@@ -294,6 +309,7 @@ bezrobocie_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 bezrobocie_2f_waga = function(x) {
   list(
     etykieta = "bezrobotni na podstawie PR1 - lipiec-wrzesień - WAŻONE",
@@ -322,6 +338,7 @@ bezrobocie_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 bezrobocie_mies_2f = function(x) {
   list(
     etykieta = "bezrobotni na podstawie PR1 - podział na miesiące",
@@ -344,6 +361,7 @@ bezrobocie_mies_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 bezrobocie_mies_2f_waga = function(x) {
   list(
     etykieta = "bezrobotni na podstawie PR1 - podział na miesiące - WAŻONE",
@@ -378,6 +396,7 @@ bezrobocie_mies_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 neet_2f = function(x) {
   list(
     etykieta = "NEET lipiec - wrzesień",
@@ -419,6 +438,7 @@ neet_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 neet_2f_waga = function(x) {
   list(
     etykieta = "NEET lipiec - wrzesień - WAŻONE",
@@ -468,6 +488,7 @@ neet_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 neet_mies_2f = function(x) {
   list(
     etykieta = "NEET lipiec - wrzesień - w podziale na miesiące",
@@ -509,6 +530,7 @@ neet_mies_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 neet_mies_2f_waga = function(x) {
   list(
     etykieta = "NEET lipiec - wrzesień - w podziale na miesiące - WAŻONE",
@@ -562,6 +584,7 @@ neet_mies_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 status_2020_10 = function(x) {
   list(
     etykieta = "STATUS_2020_10",
@@ -584,6 +607,7 @@ status_2020_10 = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 status_2020_10_waga = function(x) {
   list(
     etykieta = "STATUS_2020_10 - WAŻONE",
@@ -632,6 +656,7 @@ status_2020_10_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 kontyn_eduk_2f = function(x) {
   list(
     etykieta = "dalsze ścieżki nauki",
@@ -656,6 +681,7 @@ kontyn_eduk_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 kontyn_eduk_2f_waga = function(x) {
   list(
     etykieta = "dalsze ścieżki nauki - ważone",
@@ -678,6 +704,7 @@ kontyn_eduk_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_2f = function(x) {
   list(
     etykieta = "obecnie pracujący zarobkowo",
@@ -693,6 +720,7 @@ praca_zarob_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_2f_waga = function(x) {
   list(
     etykieta = "obecnie pracujący zarobkowo - WAŻONE",
@@ -711,6 +739,7 @@ praca_zarob_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_zawod_2f = function(x) {
   list(
     etykieta = "pracujący w wyuczonym zawodzie",
@@ -727,6 +756,7 @@ praca_zarob_zawod_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_zawod_2f_waga = function(x) {
   list(
     etykieta = "pracujący w wyuczonym zawodzie - ważone",
@@ -744,6 +774,7 @@ praca_zarob_zawod_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_branza_2f = function(x) {
   list(
     etykieta = "nie pracujący w wyuczonym zawodzie, ale w branży, do której ten zawód należy",
@@ -760,6 +791,7 @@ praca_zarob_branza_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zarob_branza_2f_waga = function(x) {
   list(
     etykieta = "nie pracujący w wyuczonym zawodzie, ale w branży, do której ten zawód należy - WAŻONE",
@@ -789,6 +821,7 @@ praca_zarob_branza_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_ogolnie_2f = function(x) {
   list(
     etykieta = "zadowolenie z pracy: ogólnie",
@@ -807,6 +840,7 @@ praca_zad_ogolnie_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_ogolnie_2f_waga = function(x) {
   list(
     etykieta = "zadowolenie z pracy: ogólnie - WAŻONE",
@@ -848,6 +882,7 @@ praca_zad_ogolnie_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_rozwoj_2f = function(x) {
   list(
     etykieta = "zadowolenie z pracy: możliwość rozwoju umiejętności zawodowych",
@@ -866,6 +901,7 @@ praca_zad_rozwoj_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_rozwoj_2f_waga = function(x) {
   list(
     etykieta = "zadowolenie z pracy: możliwość rozwoju umiejętności zawodowych - ważone",
@@ -907,6 +943,7 @@ praca_zad_rozwoj_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_zycie_2f = function(x) {
   list(
     etykieta = "zadowolenie z pracy: możliwość godzenia pracy z życiem poza pracą",
@@ -925,6 +962,7 @@ praca_zad_zycie_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_zycie_2f_waga = function(x) {
   list(
     etykieta = "zadowolenie z pracy: możliwość godzenia pracy z życiem poza pracą - ważone",
@@ -966,6 +1004,7 @@ praca_zad_zycie_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_zarobki_2f = function(x) {
   list(
     etykieta = "zadowolenie z pracy: wysokość zarobków",
@@ -984,6 +1023,7 @@ praca_zad_zarobki_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_zarobki_2f_waga = function(x) {
   list(
     etykieta = "zadowolenie z pracy: wysokość zarobków - ważone",
@@ -1025,6 +1065,7 @@ praca_zad_zarobki_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_pewnosc_2f = function(x) {
   list(
     etykieta = "zadowolenie z pracy: pewność utrzymania pracy",
@@ -1043,6 +1084,7 @@ praca_zad_pewnosc_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 praca_zad_pewnosc_2f_waga = function(x) {
   list(
     etykieta = "zadowolenie z pracy: pewność utrzymania pracy - ważone",
@@ -1074,6 +1116,7 @@ praca_zad_pewnosc_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przed_ogolne_2f = function(x) {
   list(
     etykieta = "czas poświęcany na: naukę przedmiotów ogólnych",
@@ -1092,6 +1135,7 @@ czas_przed_ogolne_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przed_ogolne_2f_waga = function(x) {
   list(
     etykieta = "czas poświęcany na: naukę przedmiotów ogólnych - WAŻONE",
@@ -1123,6 +1167,7 @@ czas_przed_ogolne_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przedzaw_teo_2f = function(x) {
   list(
     etykieta = "czas poświęcany na: teoretyczną naukę przedmiotów zawodowych",
@@ -1141,6 +1186,7 @@ czas_przedzaw_teo_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przedzaw_teo_2f_waga = function(x) {
   list(
     etykieta = "czas poświęcany na: teoretyczną naukę przedmiotów zawodowych - WAŻONE",
@@ -1172,6 +1218,7 @@ czas_przedzaw_teo_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przedzaw_prak_2f = function(x) {
   list(
     etykieta = "czas poświęcany na: praktyczną naukę przedmiotów zawodowych",
@@ -1190,6 +1237,7 @@ czas_przedzaw_prak_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 czas_przedzaw_prak_2f_waga = function(x) {
   list(
     etykieta = "czas poświęcany na: praktyczną naukę przedmiotów zawodowych - WAŻONE",
@@ -1229,6 +1277,7 @@ czas_przedzaw_prak_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_internet_2f = function(x) {
   list(
     etykieta = "warunki: dobre połączenie z internetem",
@@ -1246,6 +1295,7 @@ war_internet_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_internet_2f_waga = function(x) {
   list(
     etykieta = "warunki: dobre połączenie z internetem - WAŻONE",
@@ -1281,6 +1331,7 @@ war_internet_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_komp_2f = function(x) {
   list(
     etykieta = "warunki: odpowiedni komputer, laptop lub tablet",
@@ -1298,6 +1349,7 @@ war_komp_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_komp_2f_waga = function(x) {
   list(
     etykieta = "warunki: odpowiedni komputer, laptop lub tablet - WAŻONE",
@@ -1333,6 +1385,7 @@ war_komp_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_miejsce_2f = function(x) {
   list(
     etykieta = "warunki: spokojne miejsce do nauki",
@@ -1350,6 +1403,7 @@ war_miejsce_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_miejsce_2f_waga = function(x) {
   list(
     etykieta = "warunki: spokojne miejsce do nauki - WAŻONE",
@@ -1385,6 +1439,7 @@ war_miejsce_2f_waga = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_pomoc_2f = function(x) {
   list(
     etykieta = "warunki: pomoc w nauce w przypadku trudności",
@@ -1402,6 +1457,7 @@ war_pomoc_2f = function(x) {
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
+#' @export
 war_pomoc_2f_waga = function(x) {
   list(
     etykieta = "warunki: pomoc w nauce w przypadku trudności - WAŻONE",
